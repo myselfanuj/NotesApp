@@ -31,6 +31,10 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<note, NoteAdapter.Note
                 parent, false);
         return new NoteHolder(v);
     }
+        //for deleting note
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete(); //firestorerecyclerview auto take position of item select in recycler view
+    }
 
     class NoteHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
@@ -46,9 +50,5 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<note, NoteAdapter.Note
     }
 
 
-    //for new note
-
-
-    //for new note
 
 }

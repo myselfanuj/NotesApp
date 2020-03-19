@@ -23,7 +23,7 @@ public class NewNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close); //change icon of back button
         setTitle("Add Note");
         //View
         editTextTitle = findViewById(R.id.edit_text_title);
