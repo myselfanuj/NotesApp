@@ -2,9 +2,11 @@ package com.anujsingh.notesapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,10 +18,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NoteAdapter.OnItemClickListener {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference notebookRef = db.collection("Notebook");
     private NoteAdapter adapter;
@@ -71,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
                 adapter.deleteItem(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(recyclerView);
+
+        //for OnclicklisternerOnitem
+            adapter.setOnItemClickListener(new NoteAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                   note note = documentSnapshot.toObject(note.class);
+                    String id = documentSnapshot.getId();
+                    String path = documentSnapshot.getReference().getPath();
+                    Toast.makeText(MainActivity.this,
+                            "Position: " + position + " ID: " + id, Toast.LENGTH_SHORT).show();
+
+
+                }
+            });
+
     }
 
     @Override
@@ -102,5 +120,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
+
     }
 }
