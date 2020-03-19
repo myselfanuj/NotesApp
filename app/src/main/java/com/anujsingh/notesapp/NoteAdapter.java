@@ -44,4 +44,11 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<note, NoteAdapter.Note
             textViewPriority = itemView.findViewById(R.id.text_view_priority);
         }
     }
+
+
+    //for new note
+
+
+    //for new note
+
 }
